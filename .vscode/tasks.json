@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "shell",
+        "label": "C/C++: g++.exe build active file",
+        "command": "g++",
+        "args": [
+            "-g", 
+            "src\\*.cpp", 
+            "-IC:\\work\\software\\SDL2-2.0.14-win32-x64\\x86_64-w64-mingw32\\include\\SDL2",
+            "-LC:\\work\\software\\SDL2-2.0.14-win32-x64\\x86_64-w64-mingw32\\lib",
+            "-lmingw32",
+            "-lSDL2main",
+            "-lSDL2",
+            "-mwindows",
+            "-o", 
+            "build\\main.exe"
+        ],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "problemMatcher": ["$gcc"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
