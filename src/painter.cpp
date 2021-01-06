@@ -147,6 +147,11 @@ int Painter::PaintBars(PainterBar *bars, int count, int mode, int refresh) {
     return 0;
 }
 
+int Painter::Clear() {
+    clearRect(0, 0, w, h);
+    return 0;
+}
+
 int Painter::PaintBars(PainterBar *bars, int count) {
     int i = 0;
     while (i < count) {

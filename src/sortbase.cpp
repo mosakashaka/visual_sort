@@ -4,15 +4,21 @@
 SortBase::SortBase(Painter *painter, int* numbers, int count){
     this->numbers = new int[count];
     this->count = count;
-    PainterBar *initialBars = new PainterBar[count];
     for (int i = 0; i < count; i++) {
         this->numbers[i] = numbers[i];
+    }
+    this->painter = painter;
+}
+
+void SortBase::Init() {
+    painter->Clear();
+    PainterBar *initialBars = new PainterBar[count];
+    for (int i = 0; i < count; i++) {
         initialBars[i].barMode = PainterBarMode::NORMAL;
         initialBars[i].height = numbers[i];
         initialBars[i].index = i;
         initialBars[i].refresh = 0;
     }
-    this->painter = painter;
     
     //draw initial state
     painter->PaintBars(initialBars, count);

@@ -49,6 +49,7 @@ class Painter {
         ~Painter();
         int PaintBars(PainterBar *bars, int count);
         int PaintBars(PainterBar *bars, int count, int mode, int refresh);
+        int Clear();
 
 };
 

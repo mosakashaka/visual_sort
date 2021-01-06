@@ -22,6 +22,7 @@ class SortBase {
         ~SortBase();
 
     public:
+        void Init();
         virtual void Sort() = 0;
 };
 
@@ -29,6 +30,13 @@ class BubbleSort : public SortBase {
     public:
         void Sort();
         BubbleSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count){};
+};
+
+class SelectionSort : public SortBase {
+    public:
+        void Sort();
+        SelectionSort(Painter *painter, int* numbers, int count)
             : SortBase(painter, numbers, count){};
 };
 
