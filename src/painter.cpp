@@ -205,7 +205,18 @@ int Painter::paintBar(PainterBar *bar) {
     int barY = h - barH;
 
     if (bar->refresh) {
-        clearRect(barX, MARGIN_TOP, barW, h - MARGIN_TOP);
+        SDL_SetRenderDrawColor(ren,   
+                        BG_R,     
+                        BG_G,     
+                        BG_B,     
+                        BG_A);
+                         
+        SDL_Rect rect;
+        rect.x = barX;
+        rect.y = MARGIN_TOP;
+        rect.w = barW;
+        rect.h = h - barH - MARGIN_TOP;    
+        SDL_RenderFillRects(ren, &rect, 1);
     }
 
     unsigned char r,g,b,a;

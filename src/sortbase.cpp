@@ -144,6 +144,29 @@ int SortBase::compareAndSwap(int index1, int index2) {
 
 }
 
+int SortBase::set(int index, int number) {
+    numbers[index] = number;
+    
+    //highlight
+    bars[0].barMode = PainterBarMode::OPERATE;
+    bars[0].height = number;
+    bars[0].index = index;
+    bars[0].refresh = 1;
+    painter->PaintBars(bars, 1);
+    swap_count++;
+
+    //un-highlight
+    bars[0].barMode = PainterBarMode::NORMAL;
+    bars[0].height = number;
+    bars[0].index = index;
+    bars[0].refresh = 0;
+    painter->PaintBarsNoFlush(bars, 1);
+
+    swap_count++;
+    return 0;
+ 
+}
+
 void SortBase::done() {
     painter->Flush();
     painter->ClearTitleArea();

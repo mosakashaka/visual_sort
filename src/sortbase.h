@@ -17,11 +17,15 @@ class SortBase {
         int count = 0;
         int *numbers;
 
+        virtual void sortInner() = 0;
+
         int compare(int index1, int index2);
         int swap(int index1, int index2);
         int compareAndSwap(int index1, int index2);
+
+        int set(int index, int number);
+
         void done();
-        virtual void sortInner() = 0;
 
         SortBase(Painter *painter, int* numbers, int count, const char* name);
         ~SortBase();
@@ -58,8 +62,6 @@ class QuickSort : public SortBase {
 };
 
 class InsertionSort : public SortBase {
-    private:
-        void quick_sort(int l, int r);
     protected:
         void sortInner();
     public:
@@ -68,13 +70,19 @@ class InsertionSort : public SortBase {
 };
 
 class ShellSort : public SortBase {
-    private:
-        void quick_sort(int l, int r);
     protected:
         void sortInner();
     public:
         ShellSort(Painter *painter, int* numbers, int count)
             : SortBase(painter, numbers, count, "Shell Sort"){};
+};
+
+class MergeSort : public SortBase {
+    protected:
+        void sortInner();
+    public:
+        MergeSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Merge Sort"){};
 };
 
 #endif
