@@ -1,6 +1,6 @@
 #include "sortbase.h"
 
-void BubbleSort::Sort() {
+void BubbleSort::sortInner() {
     for (int i = count - 1; i > 0; i--) {
         int changed = 0;
         for (int j = 0; j < i; j++) {

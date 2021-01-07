@@ -4,6 +4,7 @@
 
 extern "C" {
 #include "SDL.h"
+#include "SDL_ttf.h"
 }
 
 typedef enum PainterBarMode {
@@ -25,6 +26,8 @@ class Painter {
         static Painter *instance;
         SDL_Window *win = 0;
         SDL_Renderer *ren = 0;
+
+        TTF_Font *font;
 
         int bars =  -1;
         int bar_width = -1;
@@ -48,8 +51,11 @@ class Painter {
         static Painter* GetPaitner(int barCount);
         ~Painter();
         int PaintBars(PainterBar *bars, int count);
-        int PaintBars(PainterBar *bars, int count, int mode, int refresh);
+        int PaintBarsNoFlush(PainterBar *bars, int count);
         int Clear();
+        int ClearTitleArea();
+        int Flush();
+        int PaintText(const char** lines, int count);
 
 };
 

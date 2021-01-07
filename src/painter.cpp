@@ -4,6 +4,9 @@
 #include "painter.h"
 #include <iostream>
 
+#define FONT_FILE "arial.ttf"
+#define FONT_SIZE 16
+
 static const unsigned char BG_R = 255;
 static const unsigned char BG_G = 255;
 static const unsigned char BG_B = 255;
@@ -41,6 +44,13 @@ Painter::~Painter() {
         win = 0;
     }
     SDL_Quit();
+
+
+    if (font) {
+        TTF_CloseFont(font);
+        font = 0;
+    }
+    TTF_Quit();
 }
 
 Painter * Painter::GetPaitner(int barCount) {
@@ -55,9 +65,14 @@ Painter * Painter::GetPaitner(int barCount) {
 int Painter::init(int barCount) {
             if (!_systemInit) {
                 if (SDL_Init(SDL_INIT_VIDEO)) {
-                    std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-                    throw "SDL_Init";
-                    return 1;
+                    exit(101);
+                }
+                if(TTF_Init()==-1) {
+                    exit(201);
+                }
+                font=TTF_OpenFont(FONT_FILE, FONT_SIZE);
+                if(!font) {
+                    exit(202);
                 }
                 _systemInit = 1;
             }
@@ -143,22 +158,34 @@ int Painter::clearRect(int x, int y, int w, int h) {
     return 0;
 }
 
-int Painter::PaintBars(PainterBar *bars, int count, int mode, int refresh) {
-    return 0;
-}
-
 int Painter::Clear() {
     clearRect(0, 0, w, h);
     return 0;
 }
 
+int Painter::ClearTitleArea() {
+    clearRect(0, 0, w, MARGIN_TOP);
+    SDL_RenderPresent(ren);
+    return 0;
+}
+
+int Painter::Flush() {
+    SDL_RenderPresent(ren);
+    return 0;
+}
+
 int Painter::PaintBars(PainterBar *bars, int count) {
+    PaintBarsNoFlush(bars, count);
+    SDL_RenderPresent(ren);
+    return 0;
+}
+
+int Painter::PaintBarsNoFlush(PainterBar *bars, int count) {
     int i = 0;
     while (i < count) {
         paintBar(bars + i);
         i++;
     }
-    SDL_RenderPresent(ren);
     return 0;
 }
 
@@ -216,4 +243,27 @@ int Painter::paintBar(PainterBar *bar) {
     rect.w = barW;
     rect.h = barH;    
     return SDL_RenderFillRects(ren, &rect, 1);
+}
+
+int Painter::PaintText(const char** lines, int count) {
+    SDL_Color fontColor = {30, 30, 30};
+    int fontW, fontH;
+    for (int i = 0; i < count; i++) {
+        TTF_SizeUTF8(font, lines[i], &fontW, &fontH);
+        SDL_Surface * surface =  TTF_RenderText_Solid(font, lines[i], fontColor);
+        SDL_Texture* message = SDL_CreateTextureFromSurface(ren, surface); 
+        SDL_Rect messageRect; //create a rect
+        messageRect.x = MARGIN_LEFT;  //controls the rect's x coordinate 
+        messageRect.y = FONT_SIZE * i + 10; // controls the rect's y coordinte
+        messageRect.w = fontW; // controls the width of the rect
+        messageRect.h = fontH; // controls the height of the rect
+
+        SDL_RenderCopy(ren, message, NULL, &messageRect); 
+
+        //Don't forget to free your surface and texture
+        SDL_FreeSurface(surface);
+        SDL_DestroyTexture(message);
+    }
+    SDL_RenderPresent(ren);
+    return 0;
 }

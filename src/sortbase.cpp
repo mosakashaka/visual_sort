@@ -1,16 +1,18 @@
 #include "sortbase.h"
+#include <stdio.h>
 #define SDL_DRAW_WAIT_DELAY_MS 20
 
-SortBase::SortBase(Painter *painter, int* numbers, int count){
+SortBase::SortBase(Painter *painter, int* numbers, int count, const char* name){
     this->numbers = new int[count];
     this->count = count;
     for (int i = 0; i < count; i++) {
         this->numbers[i] = numbers[i];
     }
     this->painter = painter;
+    this->name = name;
 }
 
-void SortBase::Init() {
+void SortBase::init() {
     painter->Clear();
     PainterBar *initialBars = new PainterBar[count];
     for (int i = 0; i < count; i++) {
@@ -23,6 +25,15 @@ void SortBase::Init() {
     //draw initial state
     painter->PaintBars(initialBars, count);
     delete [] initialBars;
+
+    //drawe title
+    painter->PaintText(&name, 1);
+}
+
+void SortBase::Sort() {
+    init();
+    sortInner();
+    done();
 }
 
 SortBase::~SortBase() {
@@ -47,7 +58,7 @@ int SortBase::compare(int index1, int index2) {
     int diff = numbers[index1] - numbers[index2];
     bars[0].barMode = PainterBarMode::NORMAL;
     bars[1].barMode = PainterBarMode::NORMAL;
-    painter->PaintBars(bars, 2);
+    painter->PaintBarsNoFlush(bars, 2);
 
     compare_count++;
     return diff;
@@ -78,7 +89,7 @@ int SortBase::swap(int index1, int index2) {
     bars[1].height = numbers[index2];
     bars[1].index = index2;
     bars[1].refresh = 0;
-    painter->PaintBars(bars, 2);
+    painter->PaintBarsNoFlush(bars, 2);
 
     swap_count++;
     return diff;
@@ -126,9 +137,24 @@ int SortBase::compareAndSwap(int index1, int index2) {
     bars[1].height = numbers[index2];
     bars[1].index = index2;
     bars[1].refresh = 0;
-    painter->PaintBars(bars, 2);
+    painter->PaintBarsNoFlush(bars, 2);
 
     compare_count++;
     return diff;
 
+}
+
+void SortBase::done() {
+    painter->Flush();
+    painter->ClearTitleArea();
+
+    //draw result;
+    char result[2][100];
+    snprintf(result[0], sizeof(result[0]), "[%s]: %d comparations, %d swaps",
+        name, compare_count, swap_count);
+    snprintf(result[1], sizeof(result[1]), "Press Enter to continue");
+    const char * ptr[2];
+    ptr[0] = result[0];
+    ptr[1] = result[1];
+    painter->PaintText(ptr, 2);
 }
