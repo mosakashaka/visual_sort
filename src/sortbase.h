@@ -57,4 +57,24 @@ class QuickSort : public SortBase {
             : SortBase(painter, numbers, count, "Quick Sort"){};
 };
 
+class InsertionSort : public SortBase {
+    private:
+        void quick_sort(int l, int r);
+    protected:
+        void sortInner();
+    public:
+        InsertionSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Insertion Sort"){};
+};
+
+class ShellSort : public SortBase {
+    private:
+        void quick_sort(int l, int r);
+    protected:
+        void sortInner();
+    public:
+        ShellSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Shell Sort"){};
+};
+
 #endif

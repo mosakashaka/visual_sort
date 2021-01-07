@@ -11,7 +11,9 @@ const char * hint[] = {
     "0 - All",
     "1 - Bubble Sort",
     "2 - Selection Sort",
-    "3 - Quick Sort"
+    "3 - Quick Sort",
+    "4 - Insertion Sort",
+    "5 - Shell Sort"
 };
 
 int main(int argc, char* argv[]) {
@@ -29,6 +31,8 @@ int main(int argc, char* argv[]) {
     sortMap[1] = new BubbleSort(p, numbers, count);
     sortMap[2] = new SelectionSort(p, numbers, count);
     sortMap[3] = new QuickSort(p, numbers, count);
+    sortMap[4] = new InsertionSort(p, numbers, count);
+    sortMap[5] = new ShellSort(p, numbers, count);
 
     int selectionCount = 0;
     int* selection = getUserSelection(&sortMap, p, &selectionCount);
