@@ -14,7 +14,8 @@ const char * hint[] = {
     "3 - Quick Sort",
     "4 - Insertion Sort",
     "5 - Shell Sort",
-    "6 - Merge Sort"
+    "6 - Merge Sort",
+    "7 - Heap Sort"
 };
 
 int main(int argc, char* argv[]) {
@@ -35,6 +36,7 @@ int main(int argc, char* argv[]) {
     sortMap[4] = new InsertionSort(p, numbers, count);
     sortMap[5] = new ShellSort(p, numbers, count);
     sortMap[6] = new MergeSort(p, numbers, count);
+    sortMap[7] = new HeapSort(p, numbers, count);
 
     int selectionCount = 0;
     int* selection = getUserSelection(&sortMap, p, &selectionCount);

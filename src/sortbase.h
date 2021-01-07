@@ -85,4 +85,14 @@ class MergeSort : public SortBase {
             : SortBase(painter, numbers, count, "Merge Sort"){};
 };
 
+class HeapSort : public SortBase {
+    private:
+        void adjust_heap();
+    protected:
+        void sortInner();
+    public:
+        HeapSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Heap Sort"){};
+};
+
 #endif
