@@ -10,7 +10,8 @@ int* getUserSelection(std::map<int, void*> *sortMap, Painter *p, int* selectionC
 const char * hint[] = {
     "0 - All",
     "1 - Bubble Sort",
-    "2 - Selection Sort"
+    "2 - Selection Sort",
+    "3 - Quick Sort"
 };
 
 int main(int argc, char* argv[]) {
@@ -27,6 +28,7 @@ int main(int argc, char* argv[]) {
     std::map<int, void*> sortMap;
     sortMap[1] = new BubbleSort(p, numbers, count);
     sortMap[2] = new SelectionSort(p, numbers, count);
+    sortMap[3] = new QuickSort(p, numbers, count);
 
     int selectionCount = 0;
     int* selection = getUserSelection(&sortMap, p, &selectionCount);

@@ -47,4 +47,14 @@ class SelectionSort : public SortBase {
             : SortBase(painter, numbers, count, "Selection Sort"){};
 };
 
+class QuickSort : public SortBase {
+    private:
+        void quick_sort(int l, int r);
+    protected:
+        void sortInner();
+    public:
+        QuickSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Quick Sort"){};
+};
+
 #endif
