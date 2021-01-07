@@ -95,4 +95,14 @@ class HeapSort : public SortBase {
             : SortBase(painter, numbers, count, "Heap Sort"){};
 };
 
+class CountSort : public SortBase {
+    private:
+        void adjust_node(int index, int end);
+    protected:
+        void sortInner();
+    public:
+        CountSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Counting Sort"){};
+};
+
 #endif
