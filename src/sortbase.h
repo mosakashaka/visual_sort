@@ -87,7 +87,7 @@ class MergeSort : public SortBase {
 
 class HeapSort : public SortBase {
     private:
-        void adjust_heap();
+        void adjust_node(int index, int end);
     protected:
         void sortInner();
     public:
