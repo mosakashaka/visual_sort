@@ -15,3 +15,7 @@
 3. tasks.json: `command`、`args`
 
 在vscode命令行（F1）中，选择Task:Run build task，编译生成的可执行程序在main.exe下。
+
+## 效果
+
+![截图](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/sample.gif)
