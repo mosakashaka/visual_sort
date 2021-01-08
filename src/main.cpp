@@ -17,7 +17,8 @@ const char * hint[] = {
     "6 - Merge Sort",
     "7 - Heap Sort",
     "8 - Counting Sort",
-    "9 - Bucket Sort"
+    "9 - Bucket Sort",
+    "a - Radix Sort"
 };
 
 int main(int argc, char* argv[]) {
@@ -41,6 +42,7 @@ int main(int argc, char* argv[]) {
     sortMap[7] = new HeapSort(p, numbers, count);
     sortMap[8] = new CountSort(p, numbers, count);
     sortMap[9] = new BucketSort(p, numbers, count);
+    sortMap[10] = new RadixSort(p, numbers, count);
 
     int selectionCount = 0;
     int* selection = getUserSelection(&sortMap, p, &selectionCount);
@@ -134,6 +136,9 @@ int* getUserSelection(std::map<int, void*> *sortMap, Painter *p, int* selectionC
                     hasKey = 1;
                     break;
                 } else if (number > 0) {
+                    if (number > 9) {
+                        number -= ('a' - '9' - 1);
+                    }
                     if (sortMap->find(number) != sortMap->end()) {
                         keys = new int[1];
                         keys[0] = number;

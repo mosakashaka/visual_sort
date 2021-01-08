@@ -115,4 +115,12 @@ class BucketSort : public SortBase {
             : SortBase(painter, numbers, count, "Bucket Sort"){};
 };
 
+class RadixSort : public SortBase {
+    protected:
+        void sortInner();
+    public:
+        RadixSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Radix Sort"){};
+};
+
 #endif

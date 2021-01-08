@@ -16,6 +16,20 @@
 
 在vscode命令行（F1）中，选择Task:Run build task，编译生成的可执行程序在main.exe下。
 
+## 补充
+
+类似基数排序、计数排序、桶排序等，由于使用了额外的控件，不是很好展示，这里只是展示了比较的过程。
+
+没有展示额外申请的控件的情况
+
 ## 效果
 
-![截图](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/sample.gif)
+![入口界面](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/images/sample-title.gif)
+
+![冒泡排序](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/images/sample-bubble.gif)
+
+![快速排序](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/images/sample-quick.gif)
+
+![归并排序](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/images/sample-merge.gif)
+
+![桶排序](https://raw.githubusercontent.com/mosakashaka/visual_sort/master/images/sample-bucket.gif)
