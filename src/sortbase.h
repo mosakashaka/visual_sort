@@ -105,4 +105,14 @@ class CountSort : public SortBase {
             : SortBase(painter, numbers, count, "Counting Sort"){};
 };
 
+class BucketSort : public SortBase {
+    private:
+        void sort_range(int begin, int end);
+    protected:
+        void sortInner();
+    public:
+        BucketSort(Painter *painter, int* numbers, int count)
+            : SortBase(painter, numbers, count, "Bucket Sort"){};
+};
+
 #endif
